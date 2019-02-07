@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/dera-/lerna_test/compare/@dera-/pkg002@1.2.5...@dera-/pkg002@1.2.6) (2019-02-07)
+
+
+### Features
+
+* kakikomi ([f09093b](https://github.com/dera-/lerna_test/commit/f09093b))
+
+
+
+
+
 ## [1.2.3](https://github.com/dera-/lerna_test/compare/@dera-/pkg002@1.2.2...@dera-/pkg002@1.2.3) (2019-02-07)
 
 **Note:** Version bump only for package @dera-/pkg002
