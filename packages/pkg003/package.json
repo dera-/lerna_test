@@ -1,0 +1,14 @@
+{
+  "name": "@dera-/pkg003",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "public",
+    "@dera-:registry": "https://registry.npmjs.org/"
+  }
+}
