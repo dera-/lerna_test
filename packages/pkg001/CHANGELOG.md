@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/dera-/lerna_test/compare/@dera-/pkg001@1.1.0...@dera-/pkg001@1.2.0) (2019-02-07)
+
+
+### Features
+
+* **@dera-/pkg001:** additional.txt ([5e1743e](https://github.com/dera-/lerna_test/commit/5e1743e))
+
+
+
+
+
 # [1.1.0](https://github.com/dera-/lerna_test/compare/@dera-/pkg001@1.0.4...@dera-/pkg001@1.1.0) (2019-02-07)
 
 
