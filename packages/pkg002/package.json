@@ -12,5 +12,8 @@
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@dera-/pkg001": "^1.0.3"
   }
 }
