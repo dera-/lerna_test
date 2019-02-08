@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/dera-/lerna_test/compare/@dera-/pkg002@1.2.8...@dera-/pkg002@1.2.9) (2019-02-08)
+
+**Note:** Version bump only for package @dera-/pkg002
+
+
+
+
+
 ## [1.2.8](https://github.com/dera-/lerna_test/compare/@dera-/pkg002@1.2.7...@dera-/pkg002@1.2.8) (2019-02-08)
 
 **Note:** Version bump only for package @dera-/pkg002
