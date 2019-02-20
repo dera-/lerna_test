@@ -1,6 +1,6 @@
 {
   "name": "@dera-/pkg002",
-  "version": "1.2.10",
+  "version": "1.2.11-alpha.7+31bfc51",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "keywords": [],
   "license": "UNLICENSED",
-  "gitHead": "2adcc7c2bcb34b468363b03a04f4f8d539a9f671",
+  "gitHead": "31bfc51db6b619c4d6f14f95cc719e5e78ca4320",
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@dera-/pkg001": "1.3.4"
+    "@dera-/pkg001": "1.3.5-alpha.9+31bfc51"
   }
 }
