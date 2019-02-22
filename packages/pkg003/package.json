@@ -1,6 +1,6 @@
 {
   "name": "@dera-/pkg003",
-  "version": "1.3.6",
+  "version": "1.3.7-alpha.0+7288286",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,5 +10,6 @@
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
-  }
+  },
+  "gitHead": "72882862f1c978d58fa447d40d0cdaa877966f41"
 }
