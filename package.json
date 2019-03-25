@@ -9,6 +9,7 @@
   "license": "UNLICENSED",
   "changelog": {
     "repo": "git@github.com:dera-/lerna_test.git",
+    "nextVersion": "Unreleased",
     "labels": {
       "Type: Feature": "feature",
       "bug": "fix Bug"
