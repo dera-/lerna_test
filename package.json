@@ -10,12 +10,8 @@
   "changelog": {
     "repo": "git@github.com:dera-/lerna_test.git",
     "labels": {
-      "Type: Breaking Change": "Breaking Change",
-      "Type: Feature": "Feature",
-      "Type: Bug": "Bug",
-      "Type: Maintenance": "Maintenance",
-      "Type: Documentation": "Documentation",
-      "Type: Refactoring": "Refactoring"
+      "Type: Feature": "feature",
+      "bug": "fix Bug"
     }
   },
   "devDependencies": {
