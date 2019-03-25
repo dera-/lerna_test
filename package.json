@@ -1,6 +1,6 @@
 {
   "name": "@dera-/lerna_test",
-  "version": "1.0.1-alpha",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,15 @@
   },
   "license": "UNLICENSED",
   "changelog": {
-    "repo": "git@github.com:dera-/lerna_test.git",
+    "repo": "dera-/lerna_test",
     "labels": {
-      "Type: Feature": "feature",
-      "bug": "fix Bug"
-    }
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    },
+    "cacheDir": ".changelog"
   },
   "devDependencies": {
     "lerna": "^3.10.7",
