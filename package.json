@@ -8,10 +8,13 @@
   },
   "license": "UNLICENSED",
   "changelog": {
-    "repo": "git@github.com:dera-/lerna_test.git",
+    "repo": "dera-/lerna_test",
     "labels": {
-      "Type: Feature": "feature",
-      "bug": "fix Bug"
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
     }
   },
   "devDependencies": {
