@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.2.13 (2019-03-26)
+
+#### :rocket: Enhancement
+* `pkg001`
+  * [#13](https://github.com/dera-/lerna_test/pull/13) add a.txt ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
+
 ## 1.2.12 (2019-03-26)
 
 #### :rocket: Enhancement
