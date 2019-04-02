@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "gitHead": "31bfc51db6b619c4d6f14f95cc719e5e78ca4320",
   "publishConfig": {
     "access": "public",
