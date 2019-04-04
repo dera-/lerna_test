@@ -39,7 +39,7 @@ console.log("start to update changelog");
 const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-const addedLog = execSync(`${lernaChangeLogPath} --from ${beforeVersion} --next-version ${currentVersion}`).toString();
+const addedLog = execSync(`${lernaChangeLogPath} --from v${beforeVersion} --next-version ${currentVersion}`).toString();
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
 execSync("git add ./CHANGELOG.md && git commit -m 'Update Changelog'");
