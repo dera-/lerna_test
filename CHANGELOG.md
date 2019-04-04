@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.0.5 (2019-04-04)
+
+#### :bug: Bug Fix
+* `pkg003`
+  * [#19](https://github.com/dera-/lerna_test/pull/19) なんか修正したやつ ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## 1.2.13 (2019-03-26)
 
 #### :rocket: Enhancement
