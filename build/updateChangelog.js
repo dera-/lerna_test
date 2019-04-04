@@ -1,3 +1,4 @@
+console.log("version", JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version);
 const path = require("path");
 const fs = require("fs");
 const execSync = require("child_process").execSync;
@@ -36,7 +37,8 @@ console.log("end to publish");
 
 // 現在のCHANGELOGに次バージョンのログを追加
 console.log("start to update changelog");
-const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
+const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
+console.log("currentVersion", currentVersion);
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 const addedLog = execSync(`${lernaChangeLogPath} --from v${beforeVersion} --next-version ${currentVersion}`).toString();
