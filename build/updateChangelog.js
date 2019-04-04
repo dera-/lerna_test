@@ -1,7 +1,7 @@
-console.log("version", JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version);
 const path = require("path");
 const fs = require("fs");
 const execSync = require("child_process").execSync;
+console.log("version", JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version);
 
 if (process.argv.length < 3) {
 	console.error("Please enter command as follows: node updateChangelog.js [patch|minor|major]");
