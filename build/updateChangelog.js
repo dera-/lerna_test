@@ -30,7 +30,7 @@ if (process.env.GITHUB_AUTH == null) {
 
 // publish処理
 const beforeVersion = require(path.join(__dirname, "..", "lerna.json")).version; // CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
-execSync(`${lernaPath} publish pitch --yes`);
+execSync(`${lernaPath} publish ${target} --yes`);
 
 // 現在のCHANGELOGに次バージョンのログを追加
 console.log("add changelog");
