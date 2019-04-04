@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.0.8 (2019-04-04)
+
+#### :bug: Bug Fix
+* `pkg001`
+  * [#21](https://github.com/dera-/lerna_test/pull/21) a.txtに文字追加 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 
 
 ## 2.0.5 (2019-04-04)
