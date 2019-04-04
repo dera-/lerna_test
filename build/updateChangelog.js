@@ -29,11 +29,13 @@ if (process.env.GITHUB_AUTH == null) {
 }
 
 // publish処理
+console.log("start to publish");
 const beforeVersion = require(path.join(__dirname, "..", "lerna.json")).version; // CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
 execSync(`${lernaPath} publish ${target} --yes`);
+console.log("end to publish");
 
 // 現在のCHANGELOGに次バージョンのログを追加
-console.log("add changelog");
+console.log("start to update changelog");
 const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
@@ -41,3 +43,4 @@ const addedLog = execSync(`${lernaChangeLogPath} --from ${beforeVersion} --next-
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
 execSync("git add ./CHANGELOG.md && git commit -m 'Update Changelog'");
+console.log("end to update changelog");
