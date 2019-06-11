@@ -42,7 +42,7 @@ console.log("end to publish");
 // 現在のCHANGELOGに次バージョンのログを追加
 console.log("start to update changelog");
 let addedLog;
-if (arg === "empty") {
+if (target === "empty") {
 	addedLog = `\n## ${nextVersion}\n* Ignorable change to fix broken publish ${packageJson["version"]}\n`;
 } else {
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
