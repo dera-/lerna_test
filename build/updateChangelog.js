@@ -1,23 +1,22 @@
 const path = require("path");
 const fs = require("fs");
+const semver = require("semver");
 const execSync = require("child_process").execSync;
-console.log("version", JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version);
 
 if (process.argv.length < 3) {
-	console.error("Please enter command as follows: node updateChangelog.js [patch|minor|major]");
+	console.error("Please enter command as follows: node updateChangelog.js [patch|minor|major|empty]");
 	process.exit(1);
 }
 
 // どのバージョンを上げるのかを取得
-var target = process.argv[2];
-if (! /^patch|minor|major$/.test(target)) {
-	console.error("Please specify patch, minor or major.");
+const arg = process.argv[2];
+if (! /^patch|minor|major|empty$/.test(arg)) {
+	console.error("Please specify patch, minor, major or empty.");
 	process.exit(1);
 }
 
-const lernaPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna");
 // 更新するモジュールが無ければChangelog更新処理を行わず終了する
-if (parseInt(execSync(`${lernaPath} changed | wc -l`).toString(), 10) === 0) {
+if (parseInt(execSync(`${path.join(__dirname, "..", "node_modules", ".bin", "lerna")} changed | wc -l`).toString(), 10) === 0) {
 	console.error("No modules to update version.");
 	process.exit(1);
 }
@@ -29,20 +28,14 @@ if (process.env.GITHUB_AUTH == null) {
 	process.exit(1);
 }
 
-// publish処理
-console.log("start to publish");
-const beforeVersion = require(path.join(__dirname, "..", "lerna.json")).version; // CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
-execSync(`${lernaPath} publish ${target} --yes`);
-console.log("end to publish");
+// 全akashic-cli-xxxに依存するakashic-cliモジュールの次のバージョン番号を取得
+const packageJson = require(path.join(__dirname, "..", "packages", "pkg002", "package.json"));
+const target = arg === "empty" ? "patch" : arg;
+const nextVersion = semver.inc(packageJson["version"], target);
 
 // 現在のCHANGELOGに次バージョンのログを追加
-console.log("start to update changelog");
-const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
-console.log("currentVersion", currentVersion);
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
-const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-const addedLog = execSync(`${lernaChangeLogPath} --from v${beforeVersion} --next-version ${currentVersion}`).toString();
+const addedLog =
+	execSync(`${path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog")} --next-version ${nextVersion}`).toString();
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
-execSync("git add ./CHANGELOG.md && git commit -m 'Update Changelog' && git push origin master");
-console.log("end to update changelog");

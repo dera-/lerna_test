@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish:from-package": "lerna publish from-package -y"
+    "publish:from-package": "lerna publish from-package -y",
+    "publish:empty": "node build/updateChangelog.js empty && npm run commit-changelog && lerna publish --force-publish=* patch --yes",
+    "commit-changelog": "git add ./CHANGELOG.md && git commit -m 'Update Changelog'"
   },
   "license": "UNLICENSED",
   "changelog": {
