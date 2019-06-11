@@ -43,7 +43,7 @@ console.log("end to publish");
 console.log("start to update changelog");
 let addedLog;
 if (target === "empty") {
-	const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
+	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 	addedLog = `\n## ${currentVersion}\n* Ignorable change to fix broken publish ${beforeVersion}\n`;
 } else {
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
