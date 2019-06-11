@@ -1,5 +1,4 @@
 # CHANGELOG
-Must provide GITHUB_AUTH
 
 ## 2.0.11
 #### other
