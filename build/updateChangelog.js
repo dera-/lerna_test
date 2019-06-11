@@ -37,9 +37,10 @@ const nextVersion = semver.inc(packageJson["version"], target);
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 let addedLog;
 if (arg === "empty") {
-	addedLog = `## ${nextVersion}\n* Ignorable change to fix broken publish ${packageJson["version"]}`;
+	addedLog = `\n## ${nextVersion}\n* Ignorable change to fix broken publish ${packageJson["version"]}`;
 } else {
 	addedLog = execSync(`${path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog")} --next-version ${nextVersion}`).toString();
 }
+console.log(addedLog);
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
