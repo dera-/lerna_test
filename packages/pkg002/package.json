@@ -14,6 +14,6 @@
     "@dera-:registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@dera-/pkg001": "2.0.10"
+    "@dera-/pkg001": "2.0.13"
   }
 }
