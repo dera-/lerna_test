@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.1.11
+* Ignorable change to fix broken publish 2.1.10
+
 ## 2.1.9
 * Ignorable change to fix broken publish 2.1.9
 
