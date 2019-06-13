@@ -1,7 +1,7 @@
 {
   "name": "@dera-/pkg002",
   "version": "2.1.15",
-  "description": "test",
+  "description": "testtest",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
