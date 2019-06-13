@@ -1,5 +1,5 @@
 {
-  "version": "2.1.17",
+  "version": "2.1.18",
   "npmClient": "npm",
   "command": {
     "publish": {
@@ -8,7 +8,7 @@
       ],
       "allowBranch": [
         "master",
-	"publish-test"
+        "publish-test"
       ]
     },
     "version": {
