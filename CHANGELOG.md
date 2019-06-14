@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2.1.21 (2019-06-14)
+
+#### :rocket: Enhancement
+* `pkg001`
+  * [#32](https://github.com/dera-/lerna_test/pull/32) update a.txt ([@dera-](https://github.com/dera-))
+
+#### :bug: Bug Fix
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#30](https://github.com/dera-/lerna_test/pull/30) v2.1.20 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## 2.1.20 (2019-06-13)
 
 #### :bug: Bug Fix
