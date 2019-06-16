@@ -17,7 +17,8 @@
       "enhancement": ":rocket: Enhancement",
       "bug": ":bug: Bug Fix",
       "documentation": ":memo: Documentation",
-      "internal": ":house: Internal"
+      "internal": ":house: Internal",
+      "republish": "Only Publish"
     }
   },
   "devDependencies": {
