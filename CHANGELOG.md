@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v2.1.23 (2019-06-16)
+
+#### :bug: Bug Fix
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#33](https://github.com/dera-/lerna_test/pull/33) Lerna test 0614 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## 2.1.21 (2019-06-14)
 
 #### :rocket: Enhancement
