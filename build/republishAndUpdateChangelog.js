@@ -20,12 +20,13 @@ const pullRequestLabel = "republish";
 // }
 
 function execCommand(command) {
-	const result = execSync(command).toString();
-	if (execSync("echo $?").toString().replace("\n", "") !== "0") {
+	try {
+		return execSync(command);
+	} catch (e) {
 		console.error(`Failed: ${command}.`);
+		console.error(e);
 		process.exit(1);
 	}
-	return result;
 }
 
 if (process.argv.length < 3) {
@@ -58,14 +59,14 @@ execCommand(`git checkout -b ${branchName}`);
 execCommand("git commit --allow-empty -m 'empty'");
 execCommand(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execCommand(`${lernaPath} version ${target} --allow-branch=master,${branchName} --force-publish=* --yes`);
+execCommand(`${lernaPath} version ${target} --allow-branch=* --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
 console.log("start to create PR");
 const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 // PRを作成する
-const pullReqDataString = execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`);
+const pullReqDataString = execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
 const pullReqData = JSON.parse(pullReqDataString);
 // issue(PR)にラベル付ける
 execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
@@ -82,7 +83,7 @@ console.log("start to update changelog");
 execCommand("git checkout master");
 execCommand("git pull origin master");
 const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-const addedLog = execCommand(`${lernaChangeLogPath} --next-version v${currentVersion}`);
+const addedLog = execCommand(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
