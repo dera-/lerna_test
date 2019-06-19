@@ -1,7 +1,9 @@
 const path = require("path");
 const fs = require("fs");
+const execSync = require("child_process").execSync;
 const spawnSync = require("child_process").spawnSync;
 
+const apiBaseUrl = "https://api.github.com/repos/dera-/lerna_test";
 const pullRequestBody = "※自動作成されたPRです";
 const pullRequestLabel = "republish";
 
@@ -45,19 +47,19 @@ execCommand(`git checkout -b ${branchName}`);
 execCommand("git commit --allow-empty -m 'empty'");
 execCommand(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execCommand(`${lernaPath} version ${target} --allow-branch=* --force-publish=* --yes`);
+execCommand(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
 console.log("start to create PR");
 const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 // PRを作成する
-const pullReqDataString = execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' https://api.github.com/repos/dera-/lerna_test/pulls`);
+const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
 const pullReqData = JSON.parse(pullReqDataString);
 // issue(PR)にラベル付ける
-execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' https://api.github.com/repos/dera-/lerna_test/issues/${pullReqData["number"]}/labels`);
+execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
 // PRのマージ
-execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT https://api.github.com/repos/dera-/lerna_test/pulls/${pullReqData["number"]}/merge`);
+execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT ${apiBaseUrl}/pulls/${pullReqData["number"]}/merge`);
 // ブランチ削除
 execCommand("git checkout origin/master");
 execCommand(`git branch -D ${branchName}`);
