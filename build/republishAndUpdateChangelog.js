@@ -11,6 +11,8 @@ function execCommand(command) {
 	const words = command.split(" ");
 	const result = spawnSync(words[0], words.slice(1));
 	if (result.status !== 0) {
+		console.log(result.stdout.toString());
+		console.log(result.stderr.toString());
 		console.error(`Failed: ${command}.`);
 		process.exit(1);
 	}
@@ -47,7 +49,7 @@ execCommand(`git checkout -b ${branchName}`);
 execCommand("git commit --allow-empty -m 'empty'");
 execCommand(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execCommand(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
+execCommand(`${lernaPath} version ${target} --allow-branch=origin/${branchName} --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
