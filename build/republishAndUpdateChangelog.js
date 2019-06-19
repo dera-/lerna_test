@@ -19,16 +19,6 @@ const pullRequestLabel = "republish";
 // 	return result.stdout.toString();
 // }
 
-function execCommand(command) {
-	try {
-		return execSync(command);
-	} catch (e) {
-		console.error(`Failed: ${command}.`);
-		console.error(e);
-		process.exit(1);
-	}
-}
-
 if (process.argv.length < 3) {
 	console.error("Please enter command as follows: node republishAndUpdateChangelog.js [patch|minor|major]");
 	process.exit(1);
@@ -50,44 +40,44 @@ if (process.env.GITHUB_AUTH == null) {
 
 // versionのbump処理
 console.log("start to bump version");
-const branchName = Date.now();
+const branchName = "branch" + Date.now();
 const lernaPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna");
 // versionのbumpを行う前の準備作業
-execCommand("git fetch");
-execCommand("git checkout origin/master");
-execCommand(`git checkout -b ${branchName}`);
-execCommand("git commit --allow-empty -m 'empty'");
-execCommand(`git push origin ${branchName}`);
+execSync("git fetch");
+execSync("git checkout origin/master");
+execSync(`git checkout -b ${branchName}`);
+execSync("git commit --allow-empty -m 'empty'");
+execSync(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execCommand(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
+execSync(`${lernaPath} version ${target} --allow-branch="${branchName}" --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
 console.log("start to create PR");
 const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 // PRを作成する
-const pullReqDataString = execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
+const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
 const pullReqData = JSON.parse(pullReqDataString);
 // issue(PR)にラベル付ける
-execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
+execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
 // PRのマージ
-execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT ${apiBaseUrl}/pulls/${pullReqData["number"]}/merge`);
+execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT ${apiBaseUrl}/pulls/${pullReqData["number"]}/merge`);
 // ブランチ削除
-execCommand("git checkout origin/master");
-execCommand(`git branch -D ${branchName}`);
-execCommand(`git push origin :${branchName}`);
+execSync("git checkout origin/master");
+execSync(`git branch -D ${branchName}`);
+execSync(`git push origin :${branchName}`);
 console.log("end to merge PR");
 
 // 現在のCHANGELOGに次バージョンのログを追加
 console.log("start to update changelog");
-execCommand("git checkout master");
-execCommand("git pull origin master");
+execSync("git checkout master");
+execSync("git pull origin master");
 const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-const addedLog = execCommand(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
+const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
 const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
-execCommand("git add ./CHANGELOG.md");
-execCommand("git commit -m 'Update Changelog'");
-execCommand("git push origin master");
+execSync("git add ./CHANGELOG.md");
+execSync("git commit -m 'Update Changelog'");
+execSync("git push origin master");
 console.log("end to update changelog");
