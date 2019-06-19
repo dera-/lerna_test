@@ -49,7 +49,7 @@ execSync(`git checkout -b ${branchName}`);
 execSync("git commit --allow-empty -m 'empty'");
 execSync(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execSync(`${lernaPath} version ${target} --allow-branch="${branchName}" --force-publish=* --yes`);
+execSync(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
