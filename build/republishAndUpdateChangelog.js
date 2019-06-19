@@ -7,15 +7,25 @@ const apiBaseUrl = "https://api.github.com/repos/dera-/lerna_test";
 const pullRequestBody = "※自動作成されたPRです";
 const pullRequestLabel = "republish";
 
+// function execCommand(command) {
+// 	const words = command.split(" ");
+// 	const result = spawnSync(words[0], words.slice(1));
+// 	if (result.status !== 0) {
+// 		console.log(result.stdout.toString());
+// 		console.log(result.stderr.toString());
+// 		console.error(`Failed: ${command}.`);
+// 		process.exit(1);
+// 	}
+// 	return result.stdout.toString();
+// }
+
 function execCommand(command) {
-	const words = command.split(" ");
-	const result = spawnSync(words[0], words.slice(1));
-	if (result.status !== 0) {
+	const result = execSync(command).toString();
+	if (execSync("echo $?").toString().replace("\n", "") !== "0") {
 		console.error(`Failed: ${command}.`);
-		console.error(result.stderr.toString());
 		process.exit(1);
 	}
-	return result.stdout.toString();
+	return result;
 }
 
 if (process.argv.length < 3) {
@@ -48,19 +58,19 @@ execCommand(`git checkout -b ${branchName}`);
 execCommand("git commit --allow-empty -m 'empty'");
 execCommand(`git push origin ${branchName}`);
 // versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-execCommand(`${lernaPath} version ${target} --allow-branch=* --force-publish=* --yes`);
+execCommand(`${lernaPath} version ${target} --allow-branch=master,${branchName} --force-publish=* --yes`);
 console.log("end to bump version");
 
 // PRの作成とマージ処理
 console.log("start to create PR");
 const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 // PRを作成する
-const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
+const pullReqDataString = execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`);
 const pullReqData = JSON.parse(pullReqDataString);
 // issue(PR)にラベル付ける
-execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
+execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
 // PRのマージ
-execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT ${apiBaseUrl}/pulls/${pullReqData["number"]}/merge`);
+execCommand(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT ${apiBaseUrl}/pulls/${pullReqData["number"]}/merge`);
 // ブランチ削除
 execCommand("git checkout origin/master");
 execCommand(`git branch -D ${branchName}`);
@@ -77,6 +87,6 @@ const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.m
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
 execCommand("git add ./CHANGELOG.md");
-execCommand("git commit -m 'UpdateChangelog'");
+execCommand("git commit -m 'Update Changelog'");
 execCommand("git push origin master");
 console.log("end to update changelog");
