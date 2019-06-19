@@ -54,7 +54,7 @@ const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "le
 const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' https://api.github.com/repos/dera-/lerna_test/pulls`).toString();
 const pullReqData = JSON.parse(pullReqDataString);
 // issue(PR)にラベル付ける
-execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ${pullRequestLabels}}' https://api.github.com/repos/dera-/lerna_test/issues/${pullReqData["number"]}/labels`);
+execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": "${pullRequestLabels}"}' https://api.github.com/repos/dera-/lerna_test/issues/${pullReqData["number"]}/labels`);
 // PRのマージ
 execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X PUT https://api.github.com/repos/dera-/lerna_test/pulls/${pullReqData["number"]}/merge`);
 // ブランチ削除
