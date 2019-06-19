@@ -40,7 +40,7 @@ if (process.env.GITHUB_AUTH == null) {
 
 // versionのbump処理
 console.log("start to bump version");
-const branchName = "branch" + Date.now();
+const branchName = "tmp_" + Date.now();
 const lernaPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna");
 // versionのbumpを行う前の準備作業
 execSync("git fetch");
