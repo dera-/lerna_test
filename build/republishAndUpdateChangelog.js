@@ -77,6 +77,6 @@ const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.m
 const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
 execCommand("git add ./CHANGELOG.md");
-execCommand("git commit -m 'Update Changelog'");
+execCommand("git commit -m 'UpdateChangelog'");
 execCommand("git push origin master");
 console.log("end to update changelog");
