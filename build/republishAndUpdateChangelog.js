@@ -8,7 +8,6 @@ const pullRequestLabel = "republish";
 function execCommand(command) {
 	const words = command.split(" ");
 	const result = spawnSync(words[0], words.slice(1));
-	console.log(result.stdout.toString());
 	if (result.status !== 0) {
 		console.error(`Failed: ${command}.`);
 		process.exit(1);
