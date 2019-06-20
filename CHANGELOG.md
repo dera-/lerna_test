@@ -3,6 +3,15 @@
 ## Unreleased (2019-06-20)
 
 #### :bug: Bug Fix
+* `pkg003`
+  * [#57](https://github.com/dera-/lerna_test/pull/57) update sample.txt ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
+## Unreleased (2019-06-20)
+
+#### :bug: Bug Fix
 * `pkg001`
   * [#56](https://github.com/dera-/lerna_test/pull/56) update a.txt sono2wq ([@dera-](https://github.com/dera-))
 
