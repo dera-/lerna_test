@@ -7,8 +7,7 @@
         "*.md"
       ],
       "allowBranch": [
-        "master",
-        "publish-test"
+        "master"
       ]
     },
     "version": {

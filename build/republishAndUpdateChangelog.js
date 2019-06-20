@@ -59,6 +59,11 @@ try {
 	execSync(`git push origin :${branchName}`);
 	console.log("end to merge PR");
 
+	// publish処理
+	console.log("start to publish");
+	execSync(`${lernaPath} publish from-package --yes`);
+	console.log("end to publish");
+
 	// 現在のCHANGELOGに次バージョンのログを追加
 	console.log("start to update changelog");
 	execSync("git checkout master");
