@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Unreleased (2019-06-20)
+
+#### :rocket: Enhancement
+* `pkg005`
+  * [#59](https://github.com/dera-/lerna_test/pull/59) add 05.txt ([@dera-](https://github.com/dera-))
+
+#### Only Publish
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#58](https://github.com/dera-/lerna_test/pull/58) v2.1.41 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.41 (2019-06-20)
 
 #### Only Publish
