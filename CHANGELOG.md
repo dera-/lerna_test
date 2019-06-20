@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Unreleased (2019-06-20)
+
+#### :bug: Bug Fix
+* `pkg001`
+  * [#56](https://github.com/dera-/lerna_test/pull/56) update a.txt sono2wq ([@dera-](https://github.com/dera-))
+
+#### Only Publish
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#55](https://github.com/dera-/lerna_test/pull/55) v2.1.38 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.38 (2019-06-20)
 
 #### Only Publish
