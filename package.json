@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish:from-package": "lerna publish from-package -y",
-    "publish:force-patch-all": "node build/republishAndUpdateChangelog.js patch",
+    "publish:force-patch-all": "node build/republishAndUpdateChangelog.js patch && lerna publish from-package -y",
     "commit-changelog": "git add ./CHANGELOG.md && git commit -m 'Update Changelog'"
   },
   "license": "UNLICENSED",
