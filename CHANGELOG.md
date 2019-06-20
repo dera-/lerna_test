@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased (2019-06-20)
+## v.2.1.36 (edied) (2019-06-20)
 
 #### :bug: Bug Fix
 * `pkg001`
