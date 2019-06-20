@@ -61,13 +61,13 @@ try {
 
 	// publish処理
 	console.log("start to publish");
+	execSync("git checkout master");
+	execSync("git pull origin master");
 	execSync(`${lernaPath} publish from-package --yes`);
 	console.log("end to publish");
 
 	// 現在のCHANGELOGに次バージョンのログを追加
 	console.log("start to update changelog");
-	execSync("git checkout master");
-	execSync("git pull origin master");
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
