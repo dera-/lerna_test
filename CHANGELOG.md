@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v2.1.44 (2019-06-20)
+
+#### Only Publish
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#61](https://github.com/dera-/lerna_test/pull/61) v2.1.44 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.43 (2019-06-20)
 
 #### Only Publish
