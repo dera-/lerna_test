@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased (2019-06-20)
+
+#### :bug: Bug Fix
+* `pkg001`
+  * [#54](https://github.com/dera-/lerna_test/pull/54) aaaaaaaaaaaaaaaaa ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.35 (2019-06-20)
 
 #### Only Publish
