@@ -1,4 +1,27 @@
 # CHANGELOG
+check createMarkdown(from, to) v2.1.45 HEAD
+commits [ { sha: 'b17e937',
+    refName: 'HEAD -> master, origin/master',
+    summary: 'Merge pull request #63 from dera-/tmp_1561109499342',
+    date: '2019-06-21' } ]
+commitInfos [ { commitSHA: 'b17e937',
+    message: 'Merge pull request #63 from dera-/tmp_1561109499342',
+    tags: [],
+    issueNumber: '63',
+    date: '2019-06-21' } ]
+check createMarkdown(release) [ { name: '___unreleased___',
+    date: '2019-06-21',
+    commits: [ [Object] ],
+    contributors: [ [Object] ] } ]
+
+## v2.1.44 (2019-06-21)
+
+#### Only Publish
+* `pkg001`, `pkg002`, `pkg003`, `pkg004`, `pkg005`
+  * [#63](https://github.com/dera-/lerna_test/pull/63) v2.1.44 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
 
 ## v2.1.44 (2019-06-20)
 
