@@ -39,7 +39,7 @@ try {
 	// versionをbumpするためにはリモート側にブランチを用意しておく必要がある
 	execSync(`git push origin ${branchName}`);
 	// versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-	execSync(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
+	execSync(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --no-git-tag-version --yes`);
 	console.log("end to bump version");
 
 	// PRの作成とマージ処理
@@ -63,7 +63,7 @@ try {
 	console.log("start to publish");
 	execSync("git checkout master");
 	execSync("git pull origin master");
-	execSync(`${lernaPath} publish from-package --yes`);
+	execSync(`${lernaPath} publish from-package --git-tag-version --yes`);
 	console.log("end to publish");
 
 	// 現在のCHANGELOGに次バージョンのログを追加
