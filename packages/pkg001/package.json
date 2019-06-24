@@ -1,6 +1,6 @@
 {
   "name": "@dera-/pkg001",
-  "version": "2.1.56",
+  "version": "2.1.57",
   "description": "test",
   "main": "index.js",
   "scripts": {
