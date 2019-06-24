@@ -34,12 +34,9 @@ try {
 	execSync("git fetch");
 	execSync("git checkout origin/master");
 	execSync(`git checkout -b ${branchName}`);
-	// 直前のcommitがlernaでversionをbumpしたcommitの場合、versionのbumpに失敗するので空コミットを一度挟んでおく
+	// PRを作るためだけに空コミットをしておく。PRはlerna-changelogでCHANGELOGを更新するために必要。
 	execSync("git commit --allow-empty -m 'empty'");
-	// versionをbumpするためにはリモート側にブランチを用意しておく必要がある
 	execSync(`git push origin ${branchName}`);
-	// versionのbumpしてcommit+push(ここでgithubリポジトリにタグとリリースノートが作成される)
-	execSync(`${lernaPath} version ${target} --allow-branch=${branchName} --force-publish=* --yes`);
 	console.log("end to bump version");
 
 	// PRの作成とマージ処理
@@ -63,7 +60,7 @@ try {
 	console.log("start to publish");
 	execSync("git checkout master");
 	execSync("git pull origin master");
-	execSync(`${lernaPath} publish from-package --yes`);
+	execSync(`${lernaPath} publish ${target} --force-publish=* --yes`);
 	console.log("end to publish");
 
 	// 現在のCHANGELOGに次バージョンのログを追加
