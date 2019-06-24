@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.1.64 (2019-06-24)
+
+#### Only Publish
+* [#88](https://github.com/dera-/lerna_test/pull/88) PR To Republish ([@dera-](https://github.com/dera-))
+* [#87](https://github.com/dera-/lerna_test/pull/87) PR To Republish ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.63 (2019-06-24)
 
 #### :rocket: Enhancement
