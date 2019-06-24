@@ -60,6 +60,7 @@ try {
 	execSync("git pull origin master");
 	// CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
 	const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
+	console.log(currentVersion);
 	execSync(`${lernaPath} publish ${target} --force-publish=* --yes`);
 	console.log("end to publish");
 
@@ -67,6 +68,7 @@ try {
 	console.log("start to update changelog");
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 	const addedLog = execSync(`${lernaChangeLogPath} --from v${currentVersion}`).toString();
+	console.log(addedLog);
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
