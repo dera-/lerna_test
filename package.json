@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish:from-package": "lerna publish from-package -y",
     "publish:force-patch-all": "node build/republishAndUpdateChangelog.js patch",
-    "publish:force-patch-all2": "node build/prepareRepublish.js && node build/publishAndUpdateChangelog.js patch",
+    "publish:force-patch-all2": "node build/prepareRepublish.js && FORCE_PUBLISH=true node build/publishAndUpdateChangelog.js patch",
     "commit-changelog": "git add ./CHANGELOG.md && git commit -m 'Update Changelog'"
   },
   "license": "UNLICENSED",
