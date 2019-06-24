@@ -36,6 +36,9 @@ try {
 	execSync(`git checkout -b ${branchName}`);
 	// PRを作るためだけに空コミットをしておく。PRはlerna-changelogでCHANGELOGを更新するために必要。
 	execSync("git commit --allow-empty -m 'empty'");
+	const commitHash = execSync("git rev-parse HEAD").toString();
+	console.log(commitHash);
+	console.log(commitHash.replace("\n", ""));
 	execSync(`git push origin ${branchName}`);
 	console.log("end to bump version");
 
