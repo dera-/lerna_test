@@ -1,4 +1,5 @@
 const path = require("path");
+const semver = require("semver");
 const execSync = require("child_process").execSync;
 const updateChangelog = require("./parts/updateChangelog2").updateChangelog;
 
