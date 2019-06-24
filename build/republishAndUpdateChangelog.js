@@ -36,9 +36,8 @@ try {
 	execSync(`git checkout -b ${branchName}`);
 	// PRを作るためだけに空コミットをしておく。PRはlerna-changelogでCHANGELOGを更新するために必要。
 	execSync("git commit --allow-empty -m 'empty'");
-	const commitHash = execSync("git rev-parse HEAD").toString();
-	console.log(commitHash);
-	console.log(commitHash.replace("\n", ""));
+	// CHANGELOG作成時に必要になるのでマージ直前のコミットのハッシュ値を保持しておく
+	const commitHash = execSync("git rev-parse HEAD").toString().replace("\n", "");
 	execSync(`git push origin ${branchName}`);
 	console.log("end to bump version");
 
@@ -68,8 +67,8 @@ try {
 	console.log("start to update changelog");
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
-	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "packages", "akashic-cli", "package.json")).toString()).version;
-	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
+	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
+	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion} --from ${commitHash}`).toString();
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
