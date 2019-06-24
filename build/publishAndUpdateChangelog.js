@@ -33,11 +33,11 @@ try {
 	// 現在のCHANGELOGに次バージョンのログを追加
 	// 新しくタグを打ってからでないと前回のタグからの更新内容が取得できないため、CHANGELOGへの書き込みはpublish後に行う
 	console.log("start to update changelog");
-	const lernaChangeLogPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "lerna-changelog");
+	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 	const addedLog = execSync(`${lernaChangeLogPath} --from v${beforeVersion}`).toString();
-	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "..", "CHANGELOG.md")).toString();
+	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
-	fs.writeFileSync(path.join(__dirname, "..", "..", "CHANGELOG.md"), nextChangeLog);
+	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
 	execSync("git add ./CHANGELOG.md");
 	execSync("git commit -m 'Update Changelog'");
 	execSync("git push origin master");
