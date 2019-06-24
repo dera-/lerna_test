@@ -1,6 +1,6 @@
 const path = require("path");
-const fs = require("fs");
 const execSync = require("child_process").execSync;
+const updateChangelog = require("./parts/updateChangelog").updateChangelog;
 
 const apiBaseUrl = "https://api.github.com/repos/dera-/lerna_test";
 const pullRequestBody = "※自動作成されたPRです";
@@ -26,20 +26,17 @@ if (process.env.GITHUB_AUTH == null) {
 }
 
 try {
-	// versionのbump処理
-	console.log("start to bump version");
+	// PRのマージ元ブランチを作成しておく
+	console.log("start to create branch");
 	const branchName = "tmp_" + Date.now();
-	const lernaPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna");
 	// versionのbumpを行う前の準備作業
 	execSync("git fetch");
 	execSync("git checkout origin/master");
 	execSync(`git checkout -b ${branchName}`);
 	// PRを作るためだけに空コミットをしておく。PRはlerna-changelogでCHANGELOGを更新するために必要。
 	execSync("git commit --allow-empty -m 'empty'");
-	// CHANGELOG作成時に必要になるのでマージ直前のコミットのハッシュ値を保持しておく
-	const commitHash = execSync("git rev-parse HEAD").toString().replace("\n", "");
 	execSync(`git push origin ${branchName}`);
-	console.log("end to bump version");
+	console.log("end to create branch");
 
 	// PRの作成とマージ処理
 	console.log("start to create PR");
@@ -60,18 +57,15 @@ try {
 	console.log("start to publish");
 	execSync("git checkout master");
 	execSync("git pull origin master");
-	execSync(`${lernaPath} publish ${target} --force-publish=* --yes`);
+	// CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
+	const beforeVersion = require(path.join(__dirname, "..", "lerna.json")).version;
+	execSync(`${path.join(__dirname, "..", "node_modules", ".bin", "lerna")} publish ${target} --force-publish=* --yes`);
 	console.log("end to publish");
 
 	// 現在のCHANGELOGに次バージョンのログを追加
+	// 新しくタグを打ってからでないと前回のタグからの更新内容が取得できないため、CHANGELOGへの書き込みはpublish後に行う
 	console.log("start to update changelog");
-	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
-	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
-	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion} --from ${commitHash}`).toString();
-	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
-	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
-	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
+	updateChangelog(beforeVersion);
 	execSync("git add ./CHANGELOG.md");
 	execSync("git commit -m 'Update Changelog'");
 	execSync("git push origin master");
