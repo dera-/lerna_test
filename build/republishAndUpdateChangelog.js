@@ -66,7 +66,9 @@ try {
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
 	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
 	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
+	console.log(currentVersion);
 	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
+	console.log(addedLog);
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
