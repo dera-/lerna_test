@@ -41,10 +41,8 @@ try {
 
 	// PRの作成とマージ処理
 	console.log("start to create PR");
-	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
-	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 	// PRを作成する
-	const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"v${currentVersion}", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
+	const pullReqDataString = execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"title":"Republish", "body":"${pullRequestBody}", "head":"dera-:${branchName}", "base":"master"}' ${apiBaseUrl}/pulls`).toString();
 	const pullReqData = JSON.parse(pullReqDataString);
 	// issue(PR)にラベル付ける
 	execSync(`curl --fail -H "Authorization: token ${process.env.GITHUB_AUTH}" -X POST -d '{"labels": ["${pullRequestLabel}"]}' ${apiBaseUrl}/issues/${pullReqData["number"]}/labels`);
@@ -66,6 +64,8 @@ try {
 	// 現在のCHANGELOGに次バージョンのログを追加
 	console.log("start to update changelog");
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
+	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
+	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "lerna.json")).toString()).version;
 	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
