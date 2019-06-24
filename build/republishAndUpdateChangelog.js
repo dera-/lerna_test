@@ -58,15 +58,15 @@ try {
 	console.log("start to publish");
 	execSync("git checkout master");
 	execSync("git pull origin master");
-	// CHANGELOG作成時に必要になるのでpublish前のバージョンを保持しておく
-	const currentVersion = require(path.join(__dirname, "..", "lerna.json")).version;
 	execSync(`${lernaPath} publish ${target} --force-publish=* --yes`);
 	console.log("end to publish");
 
 	// 現在のCHANGELOGに次バージョンのログを追加
 	console.log("start to update changelog");
 	const lernaChangeLogPath = path.join(__dirname, "..", "node_modules", ".bin", "lerna-changelog");
-	const addedLog = execSync(`${lernaChangeLogPath} --from v${currentVersion}`).toString();
+	// requireの場合bump前のバージョンを取得してしまうため、fs.readFileSyncを使用してbump後のバージョンを取得する
+	const currentVersion = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "packages", "akashic-cli", "package.json")).toString()).version;
+	const addedLog = execSync(`${lernaChangeLogPath} --next-version v${currentVersion}`).toString();
 	const currentChangeLog = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md")).toString();
 	const nextChangeLog = currentChangeLog.replace("# CHANGELOG\n\n", "# CHANGELOG\n" + addedLog + "\n");
 	fs.writeFileSync(path.join(__dirname, "..", "CHANGELOG.md"), nextChangeLog);
