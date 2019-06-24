@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "license": "MIT",
-  "gitHead": "31bfc51db6b619c4d6f14f95cc719e5e78ca4320",
+  "gitHead": "b2e037f2c5e9f38b8b37fffaf6a0dee0a9c32ca8",
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
