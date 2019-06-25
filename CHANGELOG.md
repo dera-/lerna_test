@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.1.74 (2019-06-25)
+
+#### Only Publish
+* [#100](https://github.com/dera-/lerna_test/pull/100) Republish ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## v2.1.73 (2019-06-25)
 
 #### Only Publish
