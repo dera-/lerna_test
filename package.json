@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish:from-package": "lerna publish from-package -y",
     "publish:force-patch-all": "node build/republishAndUpdateChangelog.js patch",
+    "publish:patch": "node build/updateChangelog.js patch && npm run commit-changelog && lerna publish patch --yes",
     "publish:force-patch-all2": "node build/prepareRepublish.js && cross-env PUBLISH_MODE=force node build/publishAndUpdateChangelog.js patch",
     "publish:force-patch-all3": "node build/prepareRepublish.js && cross-env PUBLISH_MODE=force node build/updateChangelog.js patch && npm run commit-changelog && lerna publish patch --force-publish=* --yes",
     "commit-changelog": "git add ./CHANGELOG.md && git commit -m 'Update Changelog'"
