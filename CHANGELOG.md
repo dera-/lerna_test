@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.1.75 (2019-11-20)
+
+#### :rocket: Enhancement
+* `pkg001`
+  * [#102](https://github.com/dera-/lerna_test/pull/102) update additional001.txt in pkg001 ([@dera-](https://github.com/dera-))
+  * [#101](https://github.com/dera-/lerna_test/pull/101) update pkg001 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## 2.1.74 (2019-06-25)
 
 #### Only Publish
