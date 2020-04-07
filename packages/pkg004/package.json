@@ -7,7 +7,7 @@
   },
   "license": "UNLICENSED",
   "keywords": [],
-  "description": "",
+  "description": "test(pkg004)",
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
