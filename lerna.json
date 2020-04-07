@@ -5,7 +5,7 @@
     "publish": {
       "ignoreChanges": [
         "*.md",
-	"package.json"
+        "package.json"
       ],
       "allowBranch": [
         "master"
