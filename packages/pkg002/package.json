@@ -1,6 +1,6 @@
 {
   "name": "@dera-/pkg002",
-  "version": "2.1.76",
+  "version": "2.1.77",
   "description": "testtest",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,6 @@
     "lib"
   ],
   "dependencies": {
-    "@dera-/pkg001": "2.1.76"
+    "@dera-/pkg001": "2.1.77"
   }
 }
