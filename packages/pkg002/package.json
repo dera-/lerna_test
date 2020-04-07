@@ -13,6 +13,9 @@
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@dera-/pkg001": "2.1.75"
   }
