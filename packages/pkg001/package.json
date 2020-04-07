@@ -15,5 +15,8 @@
   "publishConfig": {
     "access": "public",
     "@dera-:registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "tslint": "^6.1.1"
   }
 }

@@ -4,8 +4,9 @@
   "command": {
     "publish": {
       "ignoreChanges": [
-        "*.md",
-        "package.json"
+        "spec/**/*",
+        "package*.json",
+        ".gitignore"
       ],
       "allowBranch": [
         "master"
