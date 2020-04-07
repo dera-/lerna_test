@@ -1,4 +1,20 @@
 # CHANGELOG
+Error: Command failed: git log --oneline --pretty=%h;%D;%s;%cd --date=short vindependent..HEAD
+fatal: ambiguous argument 'vindependent..HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+
+
+    at makeError (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/node_modules/execa/index.js:172:9)
+    at Function.module.exports.sync (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/node_modules/execa/index.js:341:15)
+    at Object.listCommits (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/git.js:67:10)
+    at Changelog.getListOfCommits (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:142:20)
+    at Changelog.<anonymous> (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:86:40)
+    at step (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:32:23)
+    at Object.next (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:13:53)
+    at /home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:7:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/vagrant/workspace_akashic/lerna_test/node_modules/lerna-changelog/lib/changelog.js:3:12)
 
 ## 2.1.76 (2020-04-07)
 
