@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2.1.76 (2020-04-07)
+
+#### :rocket: Enhancement
+* `pkg001`, `pkg002`, `pkg003`
+  * [#106](https://github.com/dera-/lerna_test/pull/106) update pkg001 and pkg002 ([@dera-](https://github.com/dera-))
+* `pkg002`
+  * [#104](https://github.com/dera-/lerna_test/pull/104) update 002.txt(take2) ([@dera-](https://github.com/dera-))
+  * [#103](https://github.com/dera-/lerna_test/pull/103) update 002.txt ([@dera-](https://github.com/dera-))
+* `pkg001`
+  * [#102](https://github.com/dera-/lerna_test/pull/102) update additional001.txt in pkg001 ([@dera-](https://github.com/dera-))
+  * [#101](https://github.com/dera-/lerna_test/pull/101) update pkg001 ([@dera-](https://github.com/dera-))
+
+#### Committers: 1
+- [@dera-](https://github.com/dera-)
+
 ## 2.1.75 (2019-11-20)
 
 #### :rocket: Enhancement
