@@ -7,3 +7,4 @@ sample_desu
 さんぷる
 サンプル
 sample
+sample2
