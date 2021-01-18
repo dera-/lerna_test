@@ -1,4 +1,18 @@
 # CHANGELOG
+Error: Command failed: git describe --abbrev=0 --tags
+fatal: No names found, cannot describe anything.
+
+
+    at makeError (/home/runner/work/only-workflow/only-workflow/target/node_modules/execa/index.js:174:9)
+    at Function.module.exports.sync (/home/runner/work/only-workflow/only-workflow/target/node_modules/execa/index.js:338:15)
+    at Object.lastTag (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/git.js:62:18)
+    at Changelog.<anonymous> (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:66:40)
+    at step (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:33:23)
+    at Object.next (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:14:53)
+    at /home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:4:12)
+    at Changelog.createMarkdown (/home/runner/work/only-workflow/only-workflow/target/node_modules/lerna-changelog/lib/changelog.js:59:16)
 
 
 
